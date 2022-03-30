@@ -1,0 +1,125 @@
+#include "LinkListSingle.h"
+#include "LinkListSingle2.h"
+
+void foreach(void* i)
+{
+    printf("%d\n", *((int*)i));
+}
+
+bool compare(void* remove, void* node)
+{
+    if(*((int*)remove) == *((int*)node))
+    {
+        printf("compare:%d\n", *((int*)remove));
+        return true;
+    }
+
+    return false;
+}
+
+
+struct Person
+{
+    /* data */
+    struct LinkNode node;
+    int age;
+    char name[10]; 
+};
+
+void foreach2(void* i)
+{
+    printf("%d\n", ((struct Person*)i)->age);
+    printf("%s\n", ((struct Person*)i)->name);
+}
+
+bool compare2(void* remove, void* node)
+{
+    if(((struct Person*)remove)->age == ((struct Person*)node)->age
+        && !strcmp(((struct Person*)remove)->name,((struct Person*)node)->name))
+    {
+        printf("compare:%d\n", ((struct Person*)remove)->age);
+        printf("compare:%s\n", ((struct Person*)remove)->name);
+        return true;
+    }
+
+    return false;
+}
+
+
+
+
+int main() {
+    // LinkList linkList = Init_LinkList();
+    // int i1 = 10;
+    // //插入节点
+    // printf("%d \n", Insert_LinkList( linkList, &i1));
+    // int i2 = 20;
+    // printf("%d \n", Insert_LinkList( linkList, &i2));
+    // int i3 = 30;
+    // printf("%d \n", Insert_LinkList( linkList, &i3));
+    // int i4 = 40;
+    // printf("%d \n", Insert_LinkList( linkList, &i4));
+    // int i5 = 50;
+    // printf("%d \n", Insert_LinkList( linkList, &i5));
+    // int i6 = 60;
+    // printf("%d \n", Insert_LinkList( linkList, &i6));
+    // printf("----------Foreach_LinkList\n");
+    // //遍历
+    // Foreach_LinkList(linkList,  foreach);
+    // //按值删除
+    // printf("%d \n",RemoveByVal_LinkList(linkList, &i4,  compare));
+    // printf("----------Foreach_LinkList\n");
+    // //遍历
+    // Foreach_LinkList(linkList,  foreach);
+    // //按位置删除
+    // printf("%d \n",RemoveByPos_LinkList(linkList, 2));
+    // printf("----------Foreach_LinkList\n");
+    // //遍历
+    // Foreach_LinkList(linkList,  foreach);
+    // //清空
+    // Clear_LinkList(linkList);
+    // printf("----------Foreach_LinkList\n");
+    // //遍历
+    // Foreach_LinkList(linkList,  foreach);
+    // printf("before:%p\n", linkList);
+    // //销毁
+    // Destory_LinkList(linkList);
+
+    LinkList2 linkList = Init_LinkList2();
+    struct Person person1 = {NULL, 10,"tuzicao"};
+    //插入节点
+    printf("%d \n", Insert_LinkList2( linkList, &person1));
+
+    struct Person person2 = {NULL, 20,"zhoujie"};
+    //插入节点
+    printf("%d \n", Insert_LinkList2( linkList, &person2));
+
+    struct Person person3 = {NULL, 30,"wuxiang"};
+    //插入节点
+    printf("%d \n", Insert_LinkList2( linkList, &person3));
+
+    struct Person person4 = {NULL, 40,"caoyalan"};
+    //插入节点
+    printf("%d \n", Insert_LinkList2( linkList, &person4));
+
+    //遍历
+    Foreach_LinkList2(linkList,  foreach2);
+
+    // //按值删除
+    printf("%d \n",RemoveByVal_LinkList2(linkList, &person3,  compare));
+
+    printf("---------\n");
+
+    //遍历
+    Foreach_LinkList2(linkList,  foreach2);
+
+    //按位置删除
+    printf("%d \n",RemoveByPos_LinkList2(linkList, 1));
+
+    printf("---------\n");
+
+    //遍历
+    Foreach_LinkList2(linkList,  foreach2);
+
+
+}

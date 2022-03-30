@@ -1,0 +1,16 @@
+# 判断是否已有可执行文件，进行删除
+File=Test.exe
+.PHONY:clean
+	clean :
+	ifeq ($(File), $(wildcard $(File)))
+	-rm $(File)
+	endif
+# 编译用的c++文件
+CPP = clang++ ./*.cpp
+CPPFLAGS = -std=c++11 
+# 添加编译用的系统库文件
+TARGET = --target=i686-w64-mingw32 -v
+
+Test : 
+	 $(CPP) $(TARGET) $(CPPFLAGS) -o $(File)
+
